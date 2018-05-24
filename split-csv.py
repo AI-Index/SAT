@@ -1,6 +1,8 @@
+import os
 import pandas as pd
 
-filename = "INDU-2007-2014.csv"
+data_dir = os.path.join(os.getcwd(), "data")
+filename = os.path.join(data_dir, "INDU-2007-2014.csv")
 
 if __name__ == "__main__":
     df = pd.read_csv(filename)
@@ -16,4 +18,4 @@ if __name__ == "__main__":
     for year, (start, end) in zip(years, year_ranges):
         columns = ["instance"] + list(df.columns[start+1:end+1])
         new_df = df[columns]
-        df[columns].to_csv("INDU-" + str(year) + ".csv", index=False)
+        df[columns].to_csv(os.path.join(data_dir, "INDU-" + str(year) + ".csv"), index=False)
